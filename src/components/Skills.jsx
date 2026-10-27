@@ -61,18 +61,18 @@ export default function Skills() {
     })
   }, { scope: root })
 
-  return (
+   return (
     <section className="skills section tint" id="skills" ref={root}>
       <Wave flip />
       <div className="wrap">
         <div className="sec-head sk-head">
           <div>
-            <span className="pill">My toolbox</span>
-            <h2 className="h2 sk-title">Things I’m <span className="hl">good at<Squiggle /></span></h2>
+            <span className="pill">Ma boîte à outils</span>
+            <h2 className="h2 sk-title">Ce que je <span className="hl">maîtrise<Squiggle /></span></h2>
           </div>
           <div className="sk-side">
-            <p className="hand sec-note">psst, these stickers are draggable</p>
-            <button className="btn btn-line" onClick={() => layout(true)}>Shuffle ✦</button>
+            <p className="hand sec-note">psst, tu peux déplacer les autocollants</p>
+            <button className="btn btn-line" onClick={() => layout(true)}>Mélanger ✦</button>
           </div>
         </div>
         <div className="sk-board" ref={board}>

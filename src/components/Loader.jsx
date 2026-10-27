@@ -23,7 +23,7 @@ export default function Loader({ done, onFinish }) {
   return (
     <div className="loader" ref={root} role="status" aria-label="Loading">
       <div className="ld-stack">
-        <span className="ld-bubble hand">hi, it’s {profile.name}!</span>
+        <span className="ld-bubble hand">coucou, c'est {profile.name} !</span>
         <img className="ld-face" src={profile.avatar} alt="" />
         <div className="ld-bar"><i /></div>
       </div>

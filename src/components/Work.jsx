@@ -5,6 +5,9 @@ import Art from './Art'
 import { Squiggle } from './Bits'
 import Wave from './Wave'
 
+// on n'affiche que les projets qui ont un titre dans data.js
+const filled = projects.filter((p) => p.title)
+
 const scatter = [
   { x: 90, y: 60, r: -9 },
   { x: 0, y: 140, r: 7 },
@@ -15,21 +18,21 @@ function ProjectCard({ p, i }) {
   return (
     <article className="wk-card">
       <div className="wk-window" style={{ background: p.color }}>
-        <div className="wk-bar"><i /><i /><i /><span>{p.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}.app</span></div>
-        <div className="wk-art">{p.image ? <img src={p.image} alt={p.title} /> : <Art kind={p.visual} />}</div>
+        <div className="wk-bar"><i /><i /><i /><span>{p.title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-')}.app</span></div>
+        <div className="wk-art">{p.image ? <img src={p.image} alt={p.title} /> : <Art kind={p.visual || 'gauge'} />}</div>
       </div>
       <div className="wk-body">
         <div className="wk-top"><span className="wk-no">0{i + 1}</span><span className="wk-tag">{p.tag}</span></div>
         <h3>{p.title}</h3>
         <p>{p.text}</p>
-        <div className="chips">{p.tech.map((t) => <span key={t}>{t}</span>)}</div>
-        <a className="wk-link" href={p.link} target="_blank" rel="noreferrer">View project <span>↗</span></a>
+        <div className="chips">{(p.tech || []).filter(Boolean).map((t) => <span key={t}>{t}</span>)}</div>
+        <a className="wk-link" href={p.link} target="_blank" rel="noreferrer">Voir le projet <span>↗</span></a>
       </div>
     </article>
   )
 }
 
-/** Project cards start tossed on a table and settle into a tidy row as you scroll. */
+/** Les cartes projets commencent éparpillées et se rangent quand on fait défiler. */
 export default function Work() {
   const root = useRef(null)
   useGSAP(() => {
@@ -56,12 +59,12 @@ export default function Work() {
       <Wave flip />
       <div className="wrap">
         <div className="sec-head">
-          <span className="pill">Selected work</span>
-          <h2 className="h2 wk-title">Things I’ve <span className="hl">made<Squiggle /></span></h2>
-          <p className="hand sec-note">scroll to tidy up the table ↓</p>
+          <span className="pill">Mes projets</span>
+          <h2 className="h2 wk-title">Ce que j’ai <span className="hl">réalisé<Squiggle /></span></h2>
+          <p className="hand sec-note">{filled.length ? 'fais défiler pour ranger la table ↓' : 'mes projets arrivent bientôt ✨'}</p>
         </div>
         <div className="wk-cards">
-          {projects.map((p, i) => <ProjectCard key={p.title} p={p} i={i} />)}
+          {filled.map((p, i) => <ProjectCard key={p.title + i} p={p} i={i} />)}
         </div>
       </div>
     </section>

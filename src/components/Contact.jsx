@@ -24,26 +24,26 @@ export default function Contact() {
         <div className="ct-card">
           <div className="ct-copy">
             <span className="pill pill-light">Contact</span>
-            <h2 className="h2">Let’s be<br />friends!</h2>
-            <p>Hiring, collaborating or just want to say hi? My inbox is always open, and I usually reply within a day.</p>
+            <h2 className="h2">Travaillons<br />ensemble !</h2>
+            <p>Une offre de stage, un projet ou simplement envie d'échanger ? N'hésitez pas à m'écrire, je réponds généralement sous 24 heures.</p>
             <div className="ct-mail">
               <a href={`mailto:${profile.email}`}>{profile.email}</a>
-              <button onClick={copy}>{copied ? 'Copied ✓' : 'Copy'}</button>
+              <button onClick={copy}>{copied ? 'Copié ✓' : 'Copier'}</button>
             </div>
             <div className="ct-links">
-              <a className="btn btn-white" href={`mailto:${profile.email}?subject=Hi%20Lohitha!`}>Send an email ✉</a>
+              <a className="btn btn-white" href={`mailto:${profile.email}?subject=Prise%20de%20contact`}>M'envoyer un e-mail ✉</a>
               <a className="btn btn-ghost" href={profile.github} target="_blank" rel="noreferrer">GitHub ↗</a>
               <a className="btn btn-ghost" href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn ↗</a>
             </div>
           </div>
           <div className="ct-media">
-            <span className="ct-bubble hand">say hi! 👋</span>
-            <img className="ct-sticker" src={contactSticker} alt="Lohitha smiling" loading="lazy" />
+            <span className="ct-bubble hand">dis bonjour ! 👋</span>
+            <img className="ct-sticker" src={contactSticker} alt={profile.full} loading="lazy" />
           </div>
         </div>
         <footer className="foot">
           <span>© {new Date().getFullYear()} {profile.full}</span>
-          <button onClick={() => goTo('#top')}>Back to top ↑</button>
+          <button onClick={() => goTo('#top')}>Retour en haut ↑</button>
         </footer>
       </div>
     </section>

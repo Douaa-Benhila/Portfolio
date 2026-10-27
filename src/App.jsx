@@ -6,9 +6,7 @@ import Nav from './components/Nav'
 import Hero from './components/Hero'
 import About from './components/About'
 import Work from './components/Work'
-import Journey from './components/Journey'
 import Skills from './components/Skills'
-import Milestones from './components/Milestones'
 import Contact from './components/Contact'
 
 const BASE = import.meta.env.BASE_URL
@@ -39,9 +37,7 @@ export default function App() {
         <Hero ready={ready} />
         <About />
         <Work />
-        <Journey />
         <Skills />
-        <Milestones />
         <Contact />
       </main>
     </>

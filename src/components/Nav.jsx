@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { gsap, goTo } from '../lib/motion'
 import { profile } from '../data'
 
-const links = [['About', '#about'], ['Work', '#work'], ['Journey', '#journey'], ['Toolbox', '#skills'], ['Milestones', '#milestones']]
+const links = [['À propos', '#about'], ['Projets', '#work'], ['Compétences', '#skills']]
 
 export default function Nav({ ready }) {
   const ref = useRef(null)
@@ -15,10 +15,10 @@ export default function Nav({ ready }) {
         <img src={profile.avatar} alt="" />
         <span>{profile.name.toLowerCase()}<em>.</em></span>
       </a>
-      <nav className="nav-links" aria-label="Primary">
+      <nav className="nav-links" aria-label="Menu principal">
         {links.map(([l, h]) => <a key={h} href={h} onClick={(e) => go(e, h)}>{l}</a>)}
       </nav>
-      <a href="#contact" className="btn btn-coral nav-cta" onClick={(e) => go(e, '#contact')}>Let’s chat <span>✦</span></a>
+      <a href="#contact" className="btn btn-coral nav-cta" onClick={(e) => go(e, '#contact')}>Me contacter <span>✦</span></a>
       <button className="nav-burger" onClick={() => setOpen((o) => !o)} aria-expanded={open} aria-label="Menu"><i /><i /></button>
       <div className="nav-sheet">
         {links.concat([['Contact', '#contact']]).map(([l, h]) => <a key={h} href={h} onClick={(e) => go(e, h)}>{l}</a>)}

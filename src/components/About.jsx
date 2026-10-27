@@ -4,11 +4,15 @@ import { about } from '../data'
 import { Squiggle } from './Bits'
 import Wave from './Wave'
 
-/** A fanned stack of photos. Click (or tap) to send the top photo to the back. */
+// on ignore les photos laissées vides ('') dans data.js
+const photos = about.photos.filter(Boolean)
+
+/** Une pile de photos. Clic pour envoyer la photo du dessus derrière. */
 function PhotoStack() {
-  const [order, setOrder] = useState(about.photos.map((_, i) => i))
+  const [order, setOrder] = useState(photos.map((_, i) => i))
   const stack = useRef(null)
   const next = () => {
+    if (photos.length < 2) return
     const top = stack.current.querySelector(`[data-i="${order[0]}"]`)
     gsap.timeline()
       .to(top, { x: 260, y: -40, rotate: 18, duration: 0.35, ease: 'power2.in' })
@@ -16,17 +20,17 @@ function PhotoStack() {
       .to(top, { x: 0, y: 0, rotate: 0, duration: 0.5, ease: 'back.out(1.6)' })
   }
   return (
-    <div className="stack" ref={stack} onClick={next} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && next()} aria-label="Shuffle photos">
-      {about.photos.map((src, i) => {
+    <div className="stack" ref={stack} onClick={next} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && next()} aria-label="Changer de photo">
+      {photos.map((src, i) => {
         const pos = order.indexOf(i)
         return (
           <figure key={src} data-i={i} className={`stack-card ${pos === 0 ? "is-top" : ""}`} style={{ zIndex: 10 - pos, '--pos': pos }}>
-            <img src={src} alt={`Lohitha, ${about.roles[i]}`} loading="lazy" />
-            <figcaption><span className="role-kicker hand">I’m a</span><span className="role-name">{about.roles[i]}</span></figcaption>
+            <img src={src} alt={about.roles[i] || ''} loading="lazy" />
+            <figcaption><span className="role-kicker hand">Je suis</span><span className="role-name">{about.roles[i]}</span></figcaption>
           </figure>
         )
       })}
-      <span className="stack-hint hand">click to see my other roles ↻</span>
+      {photos.length > 1 }
     </div>
   )
 }
@@ -42,11 +46,11 @@ export default function About() {
   return (
     <section className="about section tint" id="about" ref={root}>
       <Wave />
-      <div className="wrap ab-grid">
-        <PhotoStack />
+      <div className={`wrap ab-grid ${photos.length ? '' : 'no-photo'}`}>
+        {photos.length > 0 && <PhotoStack />}
         <div className="ab-copy">
-          <span className="pill">About me</span>
-          <h2 className="h2 ab-title">A little <span className="hl">about me<Squiggle /></span></h2>
+          <span className="pill">À propos</span>
+          <h2 className="h2 ab-title">Qui <span className="hl">suis-je ?<Squiggle /></span></h2>
           {about.paragraphs.map((p) => <p className="lead" key={p}>{p}</p>)}
           <div className="ab-stats">
             {about.stats.map((s) => (
