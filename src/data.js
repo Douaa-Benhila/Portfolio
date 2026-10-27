@@ -15,7 +15,7 @@ export const profile = {
   github: 'https://github.com/Douaa-Benhila',
   linkedin: 'https://www.linkedin.com/in/douaa-benhila-b2062a2aa/',
   avatar: 'img/faces/avatar.png',
-  photo: 'public/img/stickers/lg/sticker_douaa.png', 
+  photo: 'img/stickers/lg/sticker_douaa.png',
 }
 
 export const heroCounts = [
